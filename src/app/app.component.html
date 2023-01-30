@@ -14,9 +14,11 @@
     <div>
       <mat-form-field class="input-width" appearance="fill">
         <mat-label>Isbn</mat-label>
-        <input ngModel matInput name="isbn" #title="ngModel" required="true" type="text" required
+        <input ngModel matInput name="isbn" #isbn="ngModel" required="true" type="text" required
                   placeholder="Internationale Standardbuchnummer 10-stellig">
-          <mat-error *ngIf = "title.invalid">ISBN is required</mat-error>
+          <mat-error *ngIf = "isbn.invalid">
+            {{isbn.errors?.['error']}}
+          </mat-error>
         <mat-hint class="error-hint" *ngIf="isbnErrorText.length > 0">{{ isbnErrorText }}</mat-hint>
       </mat-form-field>
     </div>
@@ -33,7 +35,7 @@
       </mat-form-field>
     </div>
     <div>
-      <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Add Book</button>
+      <button type="submit" mat-raised-button color="primary" >Add Book</button> <!--[disabled]="f.invalid"-->
     </div>
   </form>
 

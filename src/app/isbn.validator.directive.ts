@@ -10,16 +10,11 @@ export class IsbnValidatorDirective implements Validator {
   constructor() { }
   validate(control: AbstractControl<any, any>): ValidationErrors | null {
     if(control.value.length!=10) return {error:"length has to be 10 characters."};
-    const validationError = this.getIsbnValidationErrer(control.value);
-
-    
-
-    return null;
+    const validationError = this.getIsbnValidationError(control.value);
+    if(validationError == '') return null;
+    return {error:validationError};
   }
-  getIsbnValidationErrer(value: any) {
-    throw new Error('Method not implemented.');
-  }
-  registerOnValidatorChange(isbn:string): string {
+  getIsbnValidationError(isbn: string): string {
     let weight = 10  // Startgewicht
     let sum = 0
     for (let index = 0; index < 10; index++) {
@@ -47,7 +42,7 @@ export class IsbnValidatorDirective implements Validator {
     if (sum % 11 != 0) {
       return `isbn checksum is ${sum % 11} (should be 0!")`
     }
-    return '';
+    return ''
   }
 
 }
