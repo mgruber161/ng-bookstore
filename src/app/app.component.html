@@ -1,0 +1,89 @@
+<h1>Books</h1>
+
+<div class="content">
+
+  <form #f="ngForm" (submit)="submit(f)">
+    <div>
+      <mat-form-field class="input-width" appearance="fill">
+        <mat-label>Title</mat-label>
+        <input matInput name="title" type="text" #title="ngModel" [(ngModel)]="newBook.title" 
+        placeholder="Titel des Buchs" required>
+        <mat-error *ngIf = "title.invalid">ISBN is invalid</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="input-width" appearance="fill">
+        <mat-label>Isbn</mat-label>
+        <input ngModel matInput name="isbn" #title="ngModel" required="true" type="text" required
+                  placeholder="Internationale Standardbuchnummer 10-stellig">
+          <mat-error *ngIf = "title.invalid">ISBN is required</mat-error>
+        <mat-hint class="error-hint" *ngIf="isbnErrorText.length > 0">{{ isbnErrorText }}</mat-hint>
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="input-width" appearance="fill">
+        <mat-label>Author</mat-label>
+        <input ngModel matInput name="author" type="text" name="author" placeholder="Autor des Buchs">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field class="input-width" appearance="fill">
+        <mat-label>Preview</mat-label>
+        <textarea matInput name="preview" type="text" [(ngModel)]="newBook.preview" placeholder="Kurzfassung"></textarea>
+      </mat-form-field>
+    </div>
+    <div>
+      <button type="submit" mat-raised-button color="primary" [disabled]="f.invalid">Add Book</button>
+    </div>
+  </form>
+
+
+
+  <div class="tablediv" [hidden]="this.books.length == 0">
+
+    <table mat-table [dataSource]="books" class="mat-elevation-z8 demo-table">
+
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> Id </th>
+        <td mat-cell *matCellDef="let book"> {{book.id}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef> Title</th>
+        <td mat-cell *matCellDef="let book"> {{book.title}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="isbn">
+        <th mat-header-cell *matHeaderCellDef> Isbn</th>
+        <td mat-cell *matCellDef="let book"> {{book.isbn}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="author">
+        <th mat-header-cell *matHeaderCellDef> Author</th>
+        <td mat-cell *matCellDef="let book"> {{book.author}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="preview">
+        <th mat-header-cell *matHeaderCellDef> Preview</th>
+        <td mat-cell *matCellDef="let book"> {{book.preview | shortenText: 100}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <th mat-header-cell *matHeaderCellDef> </th>
+        <td mat-cell *matCellDef="let item">
+          <button mat-icon-button (click)="delete(item)" matTooltip="Click to Delete" class="iconbutton" color="warn">
+            <mat-icon aria-label="Delete">delete</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+  </div>
+</div>
+
+
+
+<!-- <pre>{{books | json }}</pre> -->

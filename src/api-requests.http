@@ -1,0 +1,34 @@
+### Gültige ISBN
+### 1484272730
+### 3423262737
+
+### Ungültige ISBN: einfach Länge und/oder eine Ziffer ändern
+
+
+### API-Key pate3stIxnUKmQIY8.f01db223241727662b525115462b85c274832947379e1c09db54a5e682d6453d
+### https://airtable.com/appuF6og13AGBF0EF/tblA77VGsHsJnqnNZ/viwJfKRRxwaaccpEu?blocks=hide
+
+GET https://api.airtable.com/v0/appuF6og13AGBF0EF/books
+Authorization: Bearer pate3stIxnUKmQIY8.f01db223241727662b525115462b85c274832947379e1c09db54a5e682d6453d
+
+### Illegal Bearer token
+GET https://api.airtable.com/v0/appuF6og13AGBF0EF/books
+Authorization: Bearer pate3stIxnUKmQIY8.f01db223241727662b525115462b85c274832947379e1c09db54a5e682d6453e
+
+### liefert id recAebedc03esjIGS
+POST https://api.airtable.com/v0/appuF6og13AGBF0EF/books
+Authorization: Bearer pate3stIxnUKmQIY8.f01db223241727662b525115462b85c274832947379e1c09db54a5e682d6453d
+Content-Type: application/json
+
+{
+    "fields":{
+        "Title": "Post-Title",
+        "Isbn": "1234567890",
+        "Preview": "Post-Preview"
+    }
+}
+
+###
+DELETE https://api.airtable.com/v0/appuF6og13AGBF0EF/books/rec7A14uiedOI5ZHq
+Authorization: Bearer pate3stIxnUKmQIY8.f01db223241727662b525115462b85c274832947379e1c09db54a5e682d6453d
+
